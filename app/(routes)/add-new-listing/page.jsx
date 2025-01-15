@@ -13,10 +13,7 @@ function AddNewListing() {
   const {user}=useUser()
   const nextHandler=async()=>{
     try{
-      console.log(selectedAddress.label,coordinates,user?.primaryEmailAddress.emailAddress)
       await addListing(selectedAddress.label,coordinates,user?.primaryEmailAddress.emailAddress)
-      
-      console.log("Lising added successfully")
       toast("New Address added for Listing")
     }catch{
       toast("Eror in adding Listing")
