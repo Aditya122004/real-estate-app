@@ -4,7 +4,7 @@ import Provider from "./Provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner"
 const inter = Plus_Jakarta_Sans({subsets: ['latin'],
-  weight: ['400', '500', '600', '700']
+  weight: ['400', '500', '600', '700','800']
 })
 export const metadata = {
   title: "Create Next App",
