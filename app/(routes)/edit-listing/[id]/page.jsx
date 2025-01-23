@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
@@ -17,13 +17,15 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter ,useParams } from "next/navigation";
 import { toast } from "sonner";
 import { getListing, updateListing } from "@/utils/FireBase";
-import { useState } from "react";
+import FileUpload from "./_components/FileUpload";
+import { ImageUpload } from "@/utils/Supabase";
 
 function EditListing() {
   const params=useParams()
   const {user}=useUser()
   const router=useRouter()
   const [listing,setListing]=useState()
+  const [images,setImages]=useState()
   useEffect(()=>{
     user&&verifyUserRecord()
   },[user])
@@ -40,13 +42,18 @@ function EditListing() {
       return router.replace('/');
     }
     setListing(initialListing)
-    console.log("initail listing",listing)
   }
   const onSubmitHandler=async(formValue)=>{
     try{
       const id=params.id
-      await updateListing(id,formValue.type,formValue.propertyType,formValue.bedroom,formValue.bathroom,formValue.builtIn,
-      formValue.parking,formValue.lotSize,formValue.area,formValue.price,formValue.hoa,formValue.description)
+     //await updateListing(id,formValue.type,formValue.propertyType,formValue.bedroom,formValue.bathroom,formValue.builtIn,
+      //formValue.parking,formValue.lotSize,formValue.area,formValue.price,formValue.hoa,formValue.description,formValue.profileImage,formValue.fullName)
+      for(const image of images){
+        const file=image
+        const fileName=Date.now().toString()
+        const fileExt=file.type.split('/').pop()
+        await ImageUpload(file,fileName,fileExt)
+      }
       toast("Listing updated Successfully")
     }catch(error){
       toast("Some Error occurred")
@@ -60,7 +67,9 @@ function EditListing() {
       <Formik
         initialValues={{
           type: listing?.type||"Sell",
-          propertyType:listing?.propertyType||''
+          propertyType:listing?.propertyType||'',
+          profileImage:user?.imageUrl,
+          fullName:user?.fullName
         }}
         onSubmit={(values) => {
           onSubmitHandler(values)
@@ -159,14 +168,22 @@ function EditListing() {
                   />
                 </div>
               </div>
+              <div>
+              <h2 className="font-lg text-gray-500 my-2">Upload Property Images</h2>
+                <FileUpload setImages={(value)=>{
+                  setImages(value)
+                }
+                  }/>
+              </div>
               <div className="flex gap-7 justify-end">
                 <Button
+                  type='submit'
                   variant="outline"
                   className="text-primary border-primary"
                 >
                   Save
-                </Button>
-                <Button>Save & Publish</Button>
+                </Button >
+                <Button type='submit'>Save & Publish</Button>
               </div>
             </div>
           </form>

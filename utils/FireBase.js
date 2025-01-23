@@ -22,7 +22,8 @@ export const addListing = async (address, coordinates, createdBy) => {
         throw error
     }
 };
-export const updateListing=async(id,type,propertyType,bedroom,bathroom,builIn,parking,lotSize,area,price ,hoa ,description)=>{
+export const updateListing=async(id,type,propertyType,bedroom,bathroom,builIn,parking,lotSize,area,price ,hoa ,description,
+    profileImage,fullName)=>{
     try{
         await setDoc(doc(db,'listing',id),{
             type,
@@ -35,7 +36,9 @@ export const updateListing=async(id,type,propertyType,bedroom,bathroom,builIn,pa
             hoa,
             description,
             parking,
-            builIn
+            builIn,
+            profileImage,
+            fullName
         },
         {
             merge:true
