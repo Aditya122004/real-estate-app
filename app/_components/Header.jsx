@@ -15,7 +15,7 @@ function Header() {
         <div className='flex gap-12 items-center'>
         <Image src={'/logo.svg'} width={150} height={150} alt='Logo'/>
         <ul className='hidden md:flex gap-10'>
-            <Link href={'/'}><li className={`hover:text-primary font-medium text-sm cursor-pointer ${path == '/' ? 'text-primary' : ''}`}>For Sale</li></Link>
+            <Link href={'/'}><li className={`hover:text-primary font-medium text-sm cursor-pointer ${path == '/' ? 'text-primary' : ''}`}>For Sell</li></Link>
             <Link href={'/rent'}><li className={`hover:text-primary font-medium text-sm cursor-pointer ${path == '/rent' ? 'text-primary' : ''}`}>For Rent</li></Link>
             <Link href={'/agent'}><li className={`hover:text-primary font-medium text-sm cursor-pointer ${path == '/agent' ? 'text-primary' : ''}`}>Agent Finder</li></Link>
         </ul>
