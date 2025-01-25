@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, GeoPoint, serverTimestamp, setDoc,getDoc,query,where,getDocs } from "firebase/firestore"; 
+import { addDoc, collection, doc, GeoPoint, serverTimestamp, setDoc,getDoc,query,where,getDocs, orderBy } from "firebase/firestore"; 
 import { db } from "./FireBaseConfig";
 
 export const addListing = async (address, coordinates, createdBy) => {
@@ -91,4 +91,23 @@ export const publishListingFirebase=async(id)=>{
     catch(error){
         console.log("Error")
     }
+}
+
+export const getListingHome=async(type)=>{
+    const docRef = collection(db, "listing");
+    const q = query(docRef, where("active", "==", true),where("type","==",type))
+    const querySnapshot = await getDocs(q)
+    if (!querySnapshot.empty) {
+        return Promise.all(querySnapshot.docs.map(async (doc) => { 
+            const data = doc.data()
+            const id = doc.id
+            const images = await getImages(id)
+            const imageUrls = images.map(image => image.url);
+            return {
+                ...data,
+                id:id,
+                images: imageUrls
+            }
+        }))}
+    return null
 }
