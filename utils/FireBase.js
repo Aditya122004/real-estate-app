@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, GeoPoint, serverTimestamp, setDoc,getDoc,query,where,getDocs, orderBy } from "firebase/firestore"; 
+import { addDoc, collection, doc, GeoPoint, serverTimestamp, setDoc,getDoc,query,where,getDocs} from "firebase/firestore"; 
 import { db } from "./FireBaseConfig";
 
 export const addListing = async (address, coordinates, createdBy) => {
@@ -109,5 +109,35 @@ export const getListingHome=async(type)=>{
                 images: imageUrls
             }
         }))}
+    return null
+}
+
+export const searchListing=async(address,type)=>{
+    const docRef = collection(db, "listing");
+    const q = query(docRef, where("active", "==", true),where("type","==",type))
+    const querySnapshot = await getDocs(q)
+    if (!querySnapshot.empty) {
+        const results = await Promise.all(
+            querySnapshot.docs
+                .filter(doc => 
+                    doc.data().address.toLowerCase().includes(address.toLowerCase())
+                )
+                .map(async (doc) => { 
+                    console.log(doc.data())
+                    const data = doc.data();
+                    const id = doc.id;
+                    const images = await getImages(id);
+                    const imageUrls = images.map(image => image.url);
+                    
+                    return {
+                        ...data,
+                        id,
+                        images: imageUrls
+                    };
+                })
+        );
+        
+        return results.filter(result => result !== undefined);
+    }
     return null
 }

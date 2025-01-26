@@ -1,12 +1,25 @@
-
-import { BathIcon, BedDouble, MapPin, Ruler } from 'lucide-react'
+import { BathIcon, BedDouble, MapPin, Ruler, Search } from 'lucide-react'
 import Image from 'next/image'
-import React from 'react'
-function Listing({listing=[]}) {
+import React, { useState } from 'react'
+import dynamic from "next/dynamic";
+const GoogleAddressSearch = dynamic(() => import("./GoogleAddressSearch"), { ssr: false });
+import { Button } from '@/components/ui/button'
+function Listing({listing,handleSearchClick,searchedAddress,clicked}) {
+  const safeListing=listing||[]
+  const [address,setAddress]=useState()
   return (
     <div>
+    <div className='p-3 flex gap-6'>
+     <GoogleAddressSearch
+     selectedAddress={(val)=>{searchedAddress(val) 
+     setAddress(val)}}
+     setCoordinates={(val)=>console.log(val)}/>
+     <Button 
+     onClick={handleSearchClick} className='flex gap-2'><Search className='h-4 w-4'/>Search</Button>
+     </div>
+     {clicked&&address&&<div className='px-3 my-5'><h2 className='text-xl'>Found <span className='font-bold'>{safeListing?.length}</span> Result in <span className='font-bold text-primary'>{address?.label}</span></h2></div>}
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-        {listing.length>0?listing.map((item,index)=>(
+        {safeListing.length>0?safeListing.map((item,index)=>(
           <div className='p-3 hover:border hover:border-primary cursor-pointer rounded-lg ' key={index} >
             <Image src={item.images[0]} width={800} height={150} className='rounded-lg object-cover h-[170px]' alt='Property Image'/>
             <div className='flex mt-2 gap-2 flex-col'>
