@@ -29,7 +29,7 @@ function ListingMapView({type}) {
         }
         catch(error){
             setClicked(false)
-            toast("Error in Search")
+            toast("Please Select An Address to Search")
         }
     }
     const getLatestListing=async()=>{

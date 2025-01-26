@@ -1,3 +1,4 @@
+'use client'
 import { BathIcon, BedDouble, MapPin, Ruler, Search } from 'lucide-react'
 import Image from 'next/image'
 import React, { useState } from 'react'
@@ -5,6 +6,8 @@ import dynamic from "next/dynamic";
 const GoogleAddressSearch = dynamic(() => import("./GoogleAddressSearch"), { ssr: false });
 import { Button } from '@/components/ui/button'
 function Listing({listing,handleSearchClick,searchedAddress,clicked}) {
+  const searchBtnHandler=handleSearchClick
+  const [add,setAdd]=useState()
   const safeListing=listing||[]
   const [address,setAddress]=useState()
   return (
@@ -12,10 +15,10 @@ function Listing({listing,handleSearchClick,searchedAddress,clicked}) {
     <div className='p-3 flex gap-6'>
      <GoogleAddressSearch
      selectedAddress={(val)=>{searchedAddress(val) 
-     setAddress(val)}}
+     setAdd(val)}}
      setCoordinates={(val)=>console.log(val)}/>
      <Button 
-     onClick={handleSearchClick} className='flex gap-2'><Search className='h-4 w-4'/>Search</Button>
+     onClick={()=>{searchBtnHandler(); setAddress(add)}} className='flex gap-2'><Search className='h-4 w-4'/>Search</Button>
      </div>
      {clicked&&address&&<div className='px-3 my-5'><h2 className='text-xl'>Found <span className='font-bold'>{safeListing?.length}</span> Result in <span className='font-bold text-primary'>{address?.label}</span></h2></div>}
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
