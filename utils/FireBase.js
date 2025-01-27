@@ -120,14 +120,13 @@ export const searchListing = async (
     parkingCount,
     propertyType
   ) => {
-    console.log(address,type,bedCount,bathCount,parkingCount,propertyType)
     const docRef = collection(db, "listing");
     const queryConditions = [
       where("active", "==", true),
       where("type", "==", type),
-      //where("bedroom", ">=", bedCount),
-      //where("bathroom", ">=", bathCount),
-      //where("parking", ">=", parkingCount),
+      where("bedroom", ">=", bedCount),
+      where("bathroom", ">=", bathCount),
+      where("parking", ">=", parkingCount),
     ];
     if (propertyType !== null) {
       queryConditions.push(where("propertyType", "==", propertyType));
