@@ -112,32 +112,52 @@ export const getListingHome=async(type)=>{
     return null
 }
 
-export const searchListing=async(address,type)=>{
+export const searchListing = async (
+    address,
+    type,
+    bedCount,
+    bathCount,
+    parkingCount,
+    propertyType
+  ) => {
+    console.log(address,type,bedCount,bathCount,parkingCount,propertyType)
     const docRef = collection(db, "listing");
-    const q = query(docRef, where("active", "==", true),where("type","==",type))
-    const querySnapshot = await getDocs(q)
-    if (!querySnapshot.empty) {
-        const results = await Promise.all(
-            querySnapshot.docs
-                .filter(doc => 
-                    doc.data().address.toLowerCase().includes(address.toLowerCase())
-                )
-                .map(async (doc) => { 
-                    console.log(doc.data())
-                    const data = doc.data();
-                    const id = doc.id;
-                    const images = await getImages(id);
-                    const imageUrls = images.map(image => image.url);
-                    
-                    return {
-                        ...data,
-                        id,
-                        images: imageUrls
-                    };
-                })
-        );
-        
-        return results.filter(result => result !== undefined);
+    const queryConditions = [
+      where("active", "==", true),
+      where("type", "==", type),
+      //where("bedroom", ">=", bedCount),
+      //where("bathroom", ">=", bathCount),
+      //where("parking", ">=", parkingCount),
+    ];
+    if (propertyType !== null) {
+      queryConditions.push(where("propertyType", "==", propertyType));
     }
-    return null
-}
+  
+    const q = query(docRef, ...queryConditions);
+    const querySnapshot = await getDocs(q);
+  
+    if (querySnapshot.empty) {
+      return null;
+    }
+  
+    const results = await Promise.all(
+      querySnapshot.docs
+        .filter((doc) =>
+          doc.data().address.toLowerCase().includes(address.toLowerCase())
+        )
+        .map(async (doc) => {
+          const data = doc.data();
+          const id = doc.id;
+          const images = await getImages(id);
+          const imageUrls = images.map((image) => image.url);
+  
+          return {
+            ...data,
+            id,
+            images: imageUrls,
+          };
+        })
+    );
+  
+    return results.filter((result) => result !== undefined);
+  };
