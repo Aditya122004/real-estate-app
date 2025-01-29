@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Listing from './Listing'
 import { getListingHome, searchListing } from '@/utils/FireBase'
 import { toast } from 'sonner'
+import GoogleMapSection from './GoogleMapSection'
 
 function ListingMapView({type}) {
     const [clicked,setClicked]=useState(false)
@@ -12,6 +13,7 @@ function ListingMapView({type}) {
     const [propertyType,setPropertyType]=useState(null)
     const[searchedAddress,setSearchedAddress]=useState()
     const [listingData,setListingData]=useState()
+    const [coordinates,setCoordinates]=useState()
     useEffect(()=>{getLatestListing()},[])
     const handleSearchClick=async()=>{
         try { 
@@ -54,15 +56,16 @@ function ListingMapView({type}) {
         }
     }
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2'>
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
         <div><Listing listing={listingData} handleSearchClick={handleSearchClick}
         searchedAddress={(val)=>setSearchedAddress(val)} 
         clicked={clicked}
         setBedCount={setBedCount}
         setBathCount={setBathCount}
         setParkingCount={setParkingCount}
-        setPropertyType={setPropertyType}/></div>
-        <div>Map</div>
+        setPropertyType={setPropertyType}
+        setCoordinates={setCoordinates}/></div>
+        <div className='fixed right-10 h-full md:w-[350px] lg:w-[450px] xl:w-[650px]'><GoogleMapSection coordinates={coordinates} clicked={clicked}/></div>
     </div>
   )
 }

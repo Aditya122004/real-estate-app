@@ -12,6 +12,7 @@ function Listing({
   listing,
   handleSearchClick,
   searchedAddress,
+  setCoordinates,
   clicked,
   setBedCount,
   setBathCount,
@@ -28,7 +29,7 @@ function Listing({
       <GoogleAddressSearch
      selectedAddress={(val)=>{searchedAddress(val) 
      setAdd(val)}}
-     setCoordinates={(val)=>console.log(val)}/>
+     setCoordinates={setCoordinates}/>
         <Button
           onClick={() => {
             searchBtnHandler()
