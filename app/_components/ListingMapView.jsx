@@ -65,7 +65,7 @@ function ListingMapView({type}) {
         setParkingCount={setParkingCount}
         setPropertyType={setPropertyType}
         setCoordinates={setCoordinates}/></div>
-        <div className='fixed right-10 h-full md:w-[350px] lg:w-[450px] xl:w-[650px]'><GoogleMapSection coordinates={coordinates} clicked={clicked}/></div>
+        <div className='fixed right-10 h-full md:w-[350px] lg:w-[450px] xl:w-[650px]'><GoogleMapSection coordinates={coordinates} clicked={clicked} listing={listingData}/></div>
     </div>
   )
 }
