@@ -1,0 +1,36 @@
+'use client'
+import { getImages, getListing } from '@/utils/FireBase'
+import { useParams, useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import { toast } from 'sonner'
+import Slider from '../_components/Slider'
+import Details from '../_components/Details'
+
+function ViewListing() {
+    const params = useParams()
+    const router=useRouter()
+    const [listingdata,setListingData]=useState()
+    const [img,setImg]=useState([])
+    useEffect(() => {
+      const verifyRecord = async () => {
+        const initialListing = await getListing(params.id);
+        if (!initialListing) {
+          toast.error("Listing not found");
+          toast("Serer Side Error");
+          return router.replace("/");
+        }
+        const imagesList = await getImages(params.id);
+        setListingData(initialListing);
+        setImg(imagesList);
+      }
+      verifyRecord()
+    }, []);
+    
+  return (
+    <div className='px-4 md:px-32 lg:px-56 py-5'><Slider imageList={img}/>
+    <Details listingDetails={listingdata}/></div>
+    
+  )
+}
+
+export default ViewListing

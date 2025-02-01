@@ -8,6 +8,7 @@ const GoogleAddressSearch = dynamic(() => import("./GoogleAddressSearch"), {
 });
 import { Button } from "@/components/ui/button";
 import FilterSection from "./FilterSection";
+import Link from "next/link";
 function Listing({
   listing,
   handleSearchClick,
@@ -59,6 +60,7 @@ function Listing({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {safeListing.length > 0
           ? safeListing.map((item, index) => (
+           <Link href={'/view-listing/'+item.id} key={index}>
               <div
                 className="p-3 hover:border hover:border-primary cursor-pointer rounded-lg "
                 key={index}
@@ -97,6 +99,7 @@ function Listing({
                   </div>
                 </div>
               </div>
+              </Link>
             ))
           : [1, 2, 3, 4, 5, 6, 7, 8].map((item, id) => (
               <div
