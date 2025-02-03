@@ -25,7 +25,7 @@ import {
 } from "@/utils/FireBase"
 import FileUpload from "./_components/FileUpload"
 import { ImageUpload } from "@/utils/Supabase"
-import { Loader, LucideArrowDownWideNarrow } from "lucide-react"
+import { Loader } from "lucide-react"
 import {
   AlertDialog,
   AlertDialogAction,

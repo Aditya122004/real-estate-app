@@ -28,7 +28,7 @@ function ViewListing() {
     
   return (
     <div className='px-4 md:px-32 lg:px-56 py-5'><Slider imageList={img}/>
-    <Details listingDetails={listingdata}/></div>
+    <Details listingDetail={listingdata} imageList={img}/></div>
     
   )
 }

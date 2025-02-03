@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { BathIcon, BedDouble,  MapPin , X } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 export default function MarkerListingItem({item,closeHandler}) {
@@ -9,7 +10,7 @@ export default function MarkerListingItem({item,closeHandler}) {
         <div className=" cursor-pointer rounded-lg  w-[180px]">
             <X onClick={closeHandler}/>
     <Image
-      src={item.images[0]}
+      src={item?.images[0]}
       width={800}
       height={150}
       className="rounded-lg object-cover h-[120px] w-[180px]"
@@ -36,7 +37,7 @@ export default function MarkerListingItem({item,closeHandler}) {
           {item?.bathroom}
         </h2>
       </div>
-      <Button size="sm">View Detail </Button>
+      <Link href={`/view-listing/${item.id}`}><Button size="sm" className='w-full'>View Detail </Button></Link>
     </div>
   </div></div>
   )
