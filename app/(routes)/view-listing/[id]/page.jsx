@@ -8,29 +8,35 @@ import Details from '../_components/Details'
 
 function ViewListing() {
     const params = useParams()
-    const router=useRouter()
-    const [listingdata,setListingData]=useState()
-    const [img,setImg]=useState([])
+    const router = useRouter()
+    const [listingdata, setListingData] = useState(null)  
+    const [img, setImg] = useState([])
+
     useEffect(() => {
-      const verifyRecord = async () => {
-        const initialListing = await getListing(params.id);
-        if (!initialListing) {
-          toast.error("Listing not found");
-          toast("Serer Side Error");
-          return router.replace("/");
-        }
-        const imagesList = await getImages(params.id);
-        setListingData(initialListing);
-        setImg(imagesList);
-      }
-      verifyRecord()
-    }, []);
-    
-  return (
-    <div className='px-4 md:px-32 lg:px-56 py-5'><Slider imageList={img}/>
-    <Details listingDetail={listingdata} imageList={img}/></div>
-    
-  )
+        const verifyRecord = async () => {
+            try {
+                const initialListing = await getListing(params.id);
+                if (!initialListing) {
+                    toast.error("Listing not found");
+                    toast("Server Side Error");
+                    return router.replace("/");
+                }
+                const imagesList = await getImages(params.id);
+                    setListingData(initialListing);
+                    setImg(imagesList);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        verifyRecord()
+    }, [params.id, router]); 
+    return (
+        <div className='px-4 md:px-32 lg:px-56 py-5'>
+            <Slider imageList={img} />
+            <Details listingDetail={listingdata} imageList={img} />
+        </div>
+    );
 }
 
-export default ViewListing
+export default ViewListing;

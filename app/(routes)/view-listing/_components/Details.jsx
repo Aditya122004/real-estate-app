@@ -14,8 +14,7 @@ import React from "react";
 import AgentDetail from "./AgentDetail";
 
 function Details({ listingDetail,imageList }) {
-  listingDetail.images=imageList.map(img=>img.url)
-  console.log(listingDetail)
+  if(listingDetail)listingDetail.images=imageList.map(img=>img.url)
   const coordinates = {
     lat: listingDetail?.coordinates?._lat,
     lng: listingDetail?.coordinates?._long,

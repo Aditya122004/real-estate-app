@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { Image } from 'lucide-react'
+import Image from 'next/image'
 import React from 'react'
 
 export default function AgentDetail({listingDetail}) {
