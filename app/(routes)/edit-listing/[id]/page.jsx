@@ -1,31 +1,31 @@
-"use client"
-import React, { useEffect, useState } from "react"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+"use client";
+import React, { useEffect, useState } from "react";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Formik } from "formik"
-import { Button } from "@/components/ui/button"
-import { useUser } from "@clerk/nextjs"
-import { useRouter, useParams } from "next/navigation"
-import { toast } from "sonner"
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Formik } from "formik";
+import { Button } from "@/components/ui/button";
+import { useUser } from "@clerk/nextjs";
+import { useRouter, useParams } from "next/navigation";
+import { toast } from "sonner";
 import {
   getImages,
   getListing,
   publishListingFirebase,
   updateListing,
   uploadImageFirebase,
-} from "@/utils/FireBase"
-import FileUpload from "./_components/FileUpload"
-import { ImageUpload } from "@/utils/Supabase"
-import { Loader } from "lucide-react"
+} from "@/utils/FireBase";
+import FileUpload from "./_components/FileUpload";
+import { ImageUpload } from "@/utils/Supabase";
+import { Loader } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -36,50 +36,49 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
 
 function EditListing() {
-  const params = useParams()
-  const { user } = useUser()
-  const router = useRouter()
-  const [listing, setListing] = useState()
-  const [images, setImages] = useState()
-  const [loading, setLoading] = useState()
-  const [img, setImg] = useState()
+  const params = useParams();
+  const { user } = useUser();
+  const router = useRouter();
+  const [listing, setListing] = useState();
+  const [images, setImages] = useState();
+  const [loading, setLoading] = useState();
+  const [img, setImg] = useState();
   useEffect(() => {
-    user && verifyUserRecord()
-  }, [user])
+    user && verifyUserRecord();
+  }, [user]);
   const verifyUserRecord = async () => {
-    const initialListing = await getListing(params.id)
+    const initialListing = await getListing(params.id);
     if (!initialListing) {
-      toast.error("Listing not found")
-      return router.replace("/")
+      toast.error("Listing not found");
+      return router.replace("/");
     }
     if (initialListing.createdBy !== user?.primaryEmailAddress?.emailAddress) {
-      toast.error("Unauthorized access")
-      return router.replace("/")
+      toast.error("Unauthorized access");
+      return router.replace("/");
     }
-    const imagesList = await getImages(params.id)
-    setListing(initialListing)
-    setImg(imagesList)
-  }
-  const publishListing=async()=>{
-    setLoading(true)
-    try{
-      await publishListingFirebase(params.id)
-      toast("Listing Published Successfully")
-      setLoading(false)
-    }
-    catch(error){
-      toast("Error in publishing Listing")
-      setLoading(false)
-    }
-    setLoading(false)
-  }
-  const onSubmitHandler = async (formValue) => {
-    setLoading(true)
+    const imagesList = await getImages(params.id);
+    setListing(initialListing);
+    setImg(imagesList);
+  };
+  const publishListing = async () => {
+    setLoading(true);
     try {
-      const id = params.id
+      await publishListingFirebase(params.id);
+      toast("Listing Published Successfully");
+      setLoading(false);
+    } catch (error) {
+      toast("Error in publishing Listing");
+      setLoading(false);
+    }
+    setLoading(false);
+  };
+  const onSubmitHandler = async (formValue) => {
+    setLoading(true);
+    try {
+      const id = params.id;
       await updateListing(
         id,
         formValue.type,
@@ -95,47 +94,58 @@ function EditListing() {
         formValue.description,
         formValue.profileImage,
         formValue.fullName
-      )
+      );
       for (const image of images) {
-        const file = image
-        const fileName = Date.now().toString()
-        const fileExt = file.type.split("/").pop()
-        await ImageUpload(file, fileName, fileExt)
-        const imgUrl = process.env.NEXT_PUBLIC_IMAGE_URL + fileName
-        await uploadImageFirebase(id, imgUrl)
+        const file = image;
+        const fileName = Date.now().toString();
+        const fileExt = file.type.split("/").pop();
+        await ImageUpload(file, fileName, fileExt);
+        const imgUrl = process.env.NEXT_PUBLIC_IMAGE_URL + fileName;
+        await uploadImageFirebase(id, imgUrl);
       }
-      toast("Listing updated Successfully")
-      setLoading(false)
+      toast("Listing updated Successfully");
+      setLoading(false);
+      router.replace("/")
     } catch (error) {
-      setLoading(false)
-      toast("Some Error occurred")
+      setLoading(false);
+      toast("Some Error occurred");
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
   return (
     <div className="px-10 md:px-36 my-10">
       <h2 className="font-bold text-2xl">
         Enter some more details about your listing
       </h2>
       <Formik
+        enableReinitialize
         initialValues={{
           type: listing?.type || "Sell",
           propertyType: listing?.propertyType || "",
+          bedroom: listing?.bedroom || 0,
+          bathroom: listing?.bathroom || 0,
+          builtIn: listing?.builtIn || 0,
+          parking: listing?.parking || 0,
+          lotSize: listing?.lotSize || 0,
+          area: listing?.area || 0,
+          price: listing?.price || 0,
+          hoa: listing?.hoa || 0,
+          description: listing?.description || "",
           profileImage: user?.imageUrl,
           fullName: user?.fullName,
         }}
         onSubmit={(values) => {
-          onSubmitHandler(values)
+          onSubmitHandler(values);
         }}
       >
-        {({ values, handleChange, handleSubmit }) => (
+        {({ values, handleChange, handleSubmit, setFieldValue }) => (
           <form onSubmit={handleSubmit}>
             <div className="p-5 rounded-lg shadow-md grid gap-7 mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <div className="flex flex-col gap-2">
                   <h2 className=" text-slate-500">Rent or Sell?</h2>
                   <RadioGroup
-                    onValueChange={(e) => (values.type = e)}
+                    onValueChange={(value) => setFieldValue("type", value)}
                     defaultValue={listing?.type || "Sell"}
                   >
                     <div className="flex items-center space-x-2">
@@ -151,7 +161,9 @@ function EditListing() {
                 <div className="flex flex-col gap-2">
                   <h2 className=" text-slate-500">Property Type</h2>
                   <Select
-                    onValueChange={(e) => (values.propertyType = e)}
+                    onValueChange={(value) =>
+                      setFieldValue("propertyType", value)
+                    }
                     name="propertyType"
                     defaultValue={listing?.propertyType}
                   >
@@ -275,13 +287,14 @@ function EditListing() {
                 </h2>
                 <FileUpload
                   setImages={(value) => {
-                    setImages(value)
+                    setImages(value);
                   }}
                   img={img}
                 />
               </div>
               <div className="flex gap-7 justify-end">
                 <Button
+                  type="submit"
                   disabled={loading}
                   variant="outline"
                   className="text-primary border-primary"
@@ -291,22 +304,29 @@ function EditListing() {
 
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button type='button' disabled={loading}>
+                    <Button type="button" disabled={loading}>
                       {loading ? <Loader /> : "Save & Publish"}
                     </Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        Ready to Publish?
-                      </AlertDialogTitle>
+                      <AlertDialogTitle>Ready to Publish?</AlertDialogTitle>
                       <AlertDialogDescription>
                         Do you really want to publish the listing?
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction onClick={publishListing}>{loading?<Loader/>:'Publish'}</AlertDialogAction>
+                      <AlertDialogAction
+                        type="submit"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleSubmit();
+                          publishListing();
+                        }}
+                      >
+                        {loading ? <Loader /> : "Publish"}
+                      </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
@@ -316,7 +336,7 @@ function EditListing() {
         )}
       </Formik>
     </div>
-  )
+  );
 }
 
-export default EditListing
+export default EditListing;

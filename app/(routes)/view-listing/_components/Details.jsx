@@ -14,6 +14,9 @@ import React from "react";
 import AgentDetail from "./AgentDetail";
 
 function Details({ listingDetail,imageList }) {
+  const shareBtnHandler=()=>{
+    
+  }
   if(listingDetail)listingDetail.images=imageList.map(img=>img.url)
   const coordinates = {
     lat: listingDetail?.coordinates?._lat,
@@ -30,7 +33,7 @@ function Details({ listingDetail,imageList }) {
               {listingDetail?.address}
             </h2>
           </div>
-          <Button className="flex gap-2">
+          <Button className="flex gap-2" onClick={shareBtnHandler}>
             <Share />
             Share
           </Button>

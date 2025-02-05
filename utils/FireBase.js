@@ -45,7 +45,7 @@ export const updateListing=async(id,type,propertyType,bedroom,bathroom,builtIn,p
         })
     }
     catch(error){
-        console.log("Error")
+        console.log("Error",error)
     }
 }
 export const getListing=async(id)=>{
