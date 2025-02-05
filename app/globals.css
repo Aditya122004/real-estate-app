@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
+html {
+  overflow-y: scroll;
+}
 
 
 @layer base {
@@ -68,4 +70,7 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+.cl-internal-17dpwu0{
+  box-shadow:none
 }
