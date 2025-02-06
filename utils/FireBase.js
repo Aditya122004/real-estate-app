@@ -160,3 +160,22 @@ export const searchListing = async (
   
     return results.filter((result) => result !== undefined);
   };
+
+  export const getUserListings=async(email)=>{
+    const docRef = collection(db, "listing");
+    const q = query(docRef, where("createdBy", "==", email))
+    const querySnapshot = await getDocs(q)
+    if (!querySnapshot.empty) {
+        return Promise.all(querySnapshot.docs.map(async (doc) => { 
+            const data = doc.data()
+            const id = doc.id
+            const images = await getImages(id)
+            const imageUrls = images.map(image => image.url);
+            return {
+                ...data,
+                id:id,
+                images: imageUrls
+            }
+        }))}
+    return null
+  }

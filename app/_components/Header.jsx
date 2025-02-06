@@ -42,15 +42,7 @@ function Header() {
               For Rent
             </li>
           </Link>
-          <Link href={"/agent"}>
-            <li
-              className={`hover:text-primary font-medium text-sm cursor-pointer ${
-                path == "/agent" ? "text-primary" : ""
-              }`}
-            >
-              Agent Finder
-            </li>
-          </Link>
+          
         </ul>
       </div>
       <div className="flex gap-2 item-center">
@@ -85,7 +77,7 @@ function Header() {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
-              <Link href="/listings" className="w-full">
+              <Link href="/user/my-listing" className="w-full">
                 My Listing
               </Link>
             </DropdownMenuItem>

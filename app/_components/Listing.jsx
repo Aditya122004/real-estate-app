@@ -66,7 +66,7 @@ function Listing({
                 key={index}
               >
                 <Image
-                  src={item.images[0]}
+                  src={item?.images[0]?item?.images[0]:'/placeholder.svg'}
                   width={800}
                   height={150}
                   className="rounded-lg object-cover h-[170px]"
