@@ -42,6 +42,15 @@ function Header() {
               For Rent
             </li>
           </Link>
+          <Link href={"/user/my-listing"}>
+            <li
+              className={`hover:text-primary font-medium text-sm cursor-pointer ${
+                path == "/user/my-listing" ? "text-primary" : ""
+              }`}
+            >
+              My Listing
+            </li>
+          </Link>
           
         </ul>
       </div>
@@ -74,11 +83,6 @@ function Header() {
             <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
               <Link href="/user" className="w-full">
                 Profile
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
-              <Link href="/user/my-listing" className="w-full">
-                My Listing
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">

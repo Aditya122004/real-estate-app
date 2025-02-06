@@ -1,5 +1,5 @@
 "use client";
-import { UserButton, UserProfile } from "@clerk/nextjs";
+import { UserProfile } from "@clerk/nextjs";
 import { Building2 } from "lucide-react";
 import React from "react";
 import UserListing from "./_components/UserListing";
