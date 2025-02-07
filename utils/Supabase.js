@@ -12,3 +12,13 @@ export const ImageUpload=async(file,fileName,fileExt)=>{
     }
     
 }
+
+export const deleteImages=async(name)=>{
+    try{
+        await supabase.storage.from('listingImages').remove([ name])
+
+    }
+    catch(error){
+        console.log(error)
+    }
+}

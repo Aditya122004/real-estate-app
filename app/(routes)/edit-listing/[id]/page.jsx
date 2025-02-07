@@ -95,15 +95,16 @@ function EditListing() {
         formValue.profileImage,
         formValue.fullName
       );
-      for (const image of images) {
+      if(images){for (const image of images) {
         const file = image;
         const fileName = Date.now().toString();
         const fileExt = file.type.split("/").pop();
         await ImageUpload(file, fileName, fileExt);
         const imgUrl = process.env.NEXT_PUBLIC_IMAGE_URL + fileName;
         await uploadImageFirebase(id, imgUrl);
-      }
+      }}
       toast("Listing updated Successfully");
+      
       setLoading(false);
       router.replace("/")
     } catch (error) {
