@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Trash, Loader } from 'lucide-react';
+import { Loader, Trash } from 'lucide-react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,13 +13,16 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 
-const DeleteDialog = ({ item, onDelete,loading, setLoading }) => {
-  const handleDeleteClick = async () => {
-    setLoading(true); 
+const DeleteDialog = ({ item, onDelete }) => {
+  const [loading,setLoading]=useState(false)
+  const handleDeleteClick = async () => { 
+    setLoading(true)
     try {
       await onDelete(item.id, item.images);
-    } finally {
-      setLoading(false);
+    } catch(error){
+        console.log(error)
+    }finally{
+      setLoading(false)
     }
   };
   
@@ -28,7 +31,7 @@ const DeleteDialog = ({ item, onDelete,loading, setLoading }) => {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button size="sm" variant="destructive" className="w-full">
-          <Trash />
+          {loading?<Loader/>:<Trash />}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -42,7 +45,7 @@ const DeleteDialog = ({ item, onDelete,loading, setLoading }) => {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction onClick={handleDeleteClick}>
-            {loading ? <Loader className='animate-spin'/> : "Delete"}
+            Delete
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

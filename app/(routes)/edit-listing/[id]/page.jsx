@@ -60,7 +60,6 @@ function EditListing() {
       return router.replace("/");
     }
     const imagesList = await getImages(params.id);
-    setEdit(false)
     setListing(initialListing);
     setImg(imagesList);
   };

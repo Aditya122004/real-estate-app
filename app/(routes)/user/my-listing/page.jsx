@@ -14,7 +14,6 @@ import { toast } from 'sonner';
 export default function MyListing() {
     const {user}=useUser()
         const[listingData,setListingData]=useState()
-        const [loading, setLoading] = useState(false)
         useEffect(()=>{
             user&&getUserListing()
         },[user])
@@ -40,7 +39,6 @@ export default function MyListing() {
     
         }
         const handleDelete=async(id,images)=>{
-          setLoading(true)
             try{
               await Promise.all(images.map((item,key)=>{
                 const fileName=item.split('/')
@@ -48,15 +46,12 @@ export default function MyListing() {
               }))
               await deleteImagesFirebase(id)
               await deleteListing(id)
-              setLoading(false)
               setListingData(listingData.filter((listing)=>listing.id!==id))
               toast('Listing Deleted Successfully')
             }
             catch(error){
-              setLoading(false)
               toast('Error in Deleting Listing')
             }
-            setLoading(false)
         }
   return (
     <div>
@@ -117,8 +112,6 @@ export default function MyListing() {
                   <DeleteDialog
                     item={item}
                     onDelete={handleDelete}
-                    loading={loading}
-                    setLoading={setLoading}
                   />
                 </div>
               </div>
