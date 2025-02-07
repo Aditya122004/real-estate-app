@@ -113,7 +113,7 @@ function EditListing() {
     setLoading(false);
   };
   return (
-    <div className="px-10 md:px-36 my-10">
+    <div className="px-[18px] sm:px-10 md:px-36 my-10">
       <h2 className="font-bold text-2xl">
         Enter some more details about your listing
       </h2>
@@ -140,9 +140,9 @@ function EditListing() {
       >
         {({ values, handleChange, handleSubmit, setFieldValue }) => (
           <form onSubmit={handleSubmit}>
-            <div className="p-5 rounded-lg shadow-md grid gap-7 mt-6">
+            <div className="bx-sd p-5 rounded-lg grid gap-7 mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 mb-[18px]">
                   <h2 className=" text-slate-500">Rent or Sell?</h2>
                   <RadioGroup
                     onValueChange={(value) => setFieldValue("type", value)}
@@ -297,14 +297,14 @@ function EditListing() {
                   type="submit"
                   disabled={loading}
                   variant="outline"
-                  className="text-primary border-primary"
+                  className="text-primary border-primary hover:bg-[#7f57f1] hover:text-white hover:shadow-xl"
                 >
                   {loading ? <Loader /> : "Save"}
                 </Button>
 
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button type="button" disabled={loading}>
+                    <Button className="bx-sd" type="button" disabled={loading}>
                       {loading ? <Loader /> : "Save & Publish"}
                     </Button>
                   </AlertDialogTrigger>

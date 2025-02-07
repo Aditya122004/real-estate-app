@@ -25,9 +25,10 @@ function Listing({
   const safeListing = listing || [];
   const [address, setAddress] = useState();
   return (
-    <div>
-      <div className="p-3 flex gap-6">
-      <GoogleAddressSearch
+    <div className="w-full mt-[-15px] sm:mt-0">
+    <div className="flex items-center justify-between gap-[16px] sm:gap-6">
+    <GoogleAddressSearch
+     className="flex items-center justify-around"     
      selectedAddress={(val)=>{searchedAddress(val) 
      setAdd(val)}}
      setCoordinates={setCoordinates}/>
@@ -36,9 +37,9 @@ function Listing({
             searchBtnHandler()
             setAddress(add)
           }}
-          className="flex gap-2"
+          className="flex gap-2 py-2 sm:py-4 sm:px-[35px] px-[32px] w-[40px] text-center bx-sd"
         >
-          <Search className="h-4 w-4" />
+          {/* <Search className="h-4 px-4 py-2" /> */}
           Search
         </Button>
       </div>
@@ -62,7 +63,7 @@ function Listing({
           ? safeListing.map((item, index) => (
            <Link href={'/view-listing/'+item.id} key={index}>
               <div
-                className="p-3 hover:border hover:border-primary cursor-pointer rounded-lg "
+                className="p-3 bx-sd hover:border hover:border-primary cursor-pointer rounded-lg "
                 key={index}
               >
                 <Image

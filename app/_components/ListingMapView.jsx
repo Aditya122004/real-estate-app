@@ -65,8 +65,8 @@ function ListingMapView({ type }) {
     }
   };
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div>
+    <div className="flex w-full">
+      <div className="flex justify-evenly p-1 sm:p-4 sm:w-[50%] lg:w-[60%] xl:w-auto"> 
         <Listing
           listing={listingData}
           handleSearchClick={handleSearchClick}
@@ -79,7 +79,7 @@ function ListingMapView({ type }) {
           setCoordinates={setCoordinates}
         />
       </div>
-      <div className="fixed right-10 h-full md:w-[350px] lg:w-[450px] xl:w-[650px]">
+      <div className="p-4 h-full sm:w-[50%] lg:w-[40%] xl:w-[70%]">
         <GoogleMapSection
           coordinates={coordinates}
           clicked={clicked}
