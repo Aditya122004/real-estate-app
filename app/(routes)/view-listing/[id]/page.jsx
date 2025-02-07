@@ -32,7 +32,7 @@ function ViewListing() {
         verifyRecord()
     }, [params.id, router]); 
     return (
-        <div className='px-4 md:px-32 lg:px-56 py-5'>
+        <div className='px-4 md:px-32 lg:px-[180px] xl:px-56 py-5'>
             <Slider imageList={img} />
             <Details listingDetail={listingdata} imageList={img} />
         </div>

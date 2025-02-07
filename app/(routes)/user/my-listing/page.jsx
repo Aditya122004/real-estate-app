@@ -55,12 +55,13 @@ export default function MyListing() {
         }
   return (
     <div>
-      <h2 className="font-bold text-2xl">Manage Your Listings</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <h2 className="font-bold text-2xl ms-2">Manage Your Listings</h2>
+      {/* grid grid-cols-1 md:grid-cols-2 gap-3 */}
+      <div className="flex flex-wrap p-3 justify-center lg:justify-between lg:items-center lg:py-3 lg:px-[30px] lg:gap-[30px] lg:mb-0 xl:gap-[10px] xl:p-3">
         {listingData &&
           listingData.map((item, index) => (
             <div
-              className="p-3 hover:border hover:border-primary cursor-pointer rounded-lg "
+              className="bx-sd my-4 w-[370px] lg:w-[450px] xl:h-[350px] xl:w-[400px] p-3 hover:border hover:border-primary cursor-pointer rounded-lg "
               key={index}
             >
               <h2 className="bg-primary text-white absolute px-2 text-sm p-1 m-1 rounded-lg">
@@ -105,7 +106,7 @@ export default function MyListing() {
                     </Button>
                   </Link>
                   <Link href={"/edit-listing/" + item.id} className="w-full">
-                    <Button size="sm" className="w-full">
+                    <Button size="sm" className="bx-sd w-full">
                       Edit
                     </Button>
                   </Link>

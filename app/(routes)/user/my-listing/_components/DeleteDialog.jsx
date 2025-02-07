@@ -30,7 +30,7 @@ const DeleteDialog = ({ item, onDelete }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size="sm" variant="destructive" className="w-full">
+        <Button size="sm" variant="destructive" className="w-full bx-sd">
           {loading?<Loader/>:<Trash />}
         </Button>
       </AlertDialogTrigger>
@@ -44,7 +44,7 @@ const DeleteDialog = ({ item, onDelete }) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDeleteClick}>
+          <AlertDialogAction className="bg-red-600 hover:bg-red-700" onClick={handleDeleteClick}>
             Delete
           </AlertDialogAction>
         </AlertDialogFooter>
