@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, GeoPoint, serverTimestamp, setDoc,getDoc,query,where,getDocs} from "firebase/firestore"; 
+import { addDoc, collection, doc, GeoPoint, serverTimestamp, setDoc,getDoc,query,where,getDocs, deleteDoc} from "firebase/firestore"; 
 import { db } from "./FireBaseConfig";
 
 export const addListing = async (address, coordinates, createdBy) => {
@@ -69,15 +69,22 @@ export const uploadImageFirebase=async(listing_id,url)=>{
     }
 }
 
-export const getImages=async(id)=>{
+export const getImages = async (id) => {
     const docRef = collection(db, "listingImages");
-    const q = query(docRef, where("listing_id", "==", id))
-    const querySnapshot = await getDocs(q)
+    const q = query(docRef, where("listing_id", "==", id));
+    const querySnapshot = await getDocs(q);
     if (!querySnapshot.empty) {
-        return querySnapshot.docs.map(doc => doc.data())
+        return Promise.all(querySnapshot.docs.map(async (doc) => { 
+            const data = doc.data();
+            const id = doc.id;
+            return {
+                ...data,
+                id: id
+            };
+        }));
     }
-    return null
-}
+    return null;
+};
 
 export const publishListingFirebase=async(id)=>{
     try{
@@ -179,3 +186,23 @@ export const searchListing = async (
         }))}
     return null
   }
+export const deleteImagesFirebase=async(id)=>{
+    try{
+       const imgs=await getImages(id)
+       await Promise.all(imgs.map((item) => {
+        return deleteDoc(doc(db, 'listingImages', item.id));
+    }));
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+export const deleteListing=async(id)=>{
+    try{
+        await deleteDoc(doc(db,'listing', id));
+     }
+     catch(error){
+         console.log(error)
+     }
+}
