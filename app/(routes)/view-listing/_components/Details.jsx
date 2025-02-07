@@ -17,7 +17,14 @@ function Details({ listingDetail,imageList }) {
   const shareBtnHandler=()=>{
     
   }
-  if(listingDetail)listingDetail.images=imageList.map(img=>img.url)
+  if(listingDetail){
+    if(imageList){
+      listingDetail.images=imageList.map(img=>img.url)
+    }else{
+      listingDetail.images=[]
+    }
+    
+  }
   const coordinates = {
     lat: listingDetail?.coordinates?._lat,
     lng: listingDetail?.coordinates?._long,

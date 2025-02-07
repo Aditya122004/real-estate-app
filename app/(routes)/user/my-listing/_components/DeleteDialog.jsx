@@ -13,10 +13,16 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 
-const DeleteDialog = ({ item, onDelete, loading }) => {
-  const handleDeleteClick = () => {
-    onDelete(item.id, item.images);
+const DeleteDialog = ({ item, onDelete,loading, setLoading }) => {
+  const handleDeleteClick = async () => {
+    setLoading(true); 
+    try {
+      await onDelete(item.id, item.images);
+    } finally {
+      setLoading(false);
+    }
   };
+  
 
   return (
     <AlertDialog>
@@ -36,7 +42,7 @@ const DeleteDialog = ({ item, onDelete, loading }) => {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction onClick={handleDeleteClick}>
-            {loading ? <Loader /> : "Delete"}
+            {loading ? <Loader className='animate-spin'/> : "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

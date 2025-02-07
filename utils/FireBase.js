@@ -109,7 +109,7 @@ export const getListingHome=async(type)=>{
             const data = doc.data()
             const id = doc.id
             const images = await getImages(id)
-            const imageUrls = images.map(image => image.url);
+            const imageUrls = images ? images.map(image => image.url) : [];
             return {
                 ...data,
                 id:id,
@@ -155,7 +155,7 @@ export const searchListing = async (
           const data = doc.data();
           const id = doc.id;
           const images = await getImages(id);
-          const imageUrls = images.map((image) => image.url);
+          const imageUrls = images ? images.map(image => image.url) : [];
   
           return {
             ...data,
@@ -177,7 +177,7 @@ export const searchListing = async (
             const data = doc.data()
             const id = doc.id
             const images = await getImages(id)
-            const imageUrls = images.map(image => image.url);
+            const imageUrls = images ? images.map(image => image.url) : [];
             return {
                 ...data,
                 id:id,

@@ -118,6 +118,7 @@ export default function MyListing() {
                     item={item}
                     onDelete={handleDelete}
                     loading={loading}
+                    setLoading={setLoading}
                   />
                 </div>
               </div>
