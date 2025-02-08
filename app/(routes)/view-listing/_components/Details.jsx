@@ -13,9 +13,10 @@ import {
 import React from "react";
 import AgentDetail from "./AgentDetail";
 
-function Details({ listingDetail,imageList }) {
-  const shareBtnHandler=()=>{
-    
+
+
+function Details({ listingDetail, imageList }) {
+  const shareBtnHandler = async () => {
   }
   if(listingDetail){
     if(imageList){
