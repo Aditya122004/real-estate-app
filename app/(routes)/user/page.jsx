@@ -1,6 +1,6 @@
 "use client";
 import { UserProfile } from "@clerk/nextjs";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function User() {
   return (
