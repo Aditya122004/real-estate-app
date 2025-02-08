@@ -14,7 +14,7 @@ export default function AgentDetail({ listingDetail }) {
         const buyerEmail = user?.primaryEmailAddress.emailAddress;
         const agentEmail = listingDetail?.createdBy;
         const buyerName = user?.fullName;
-        const propertyName = `${listingDetail?.description} - add. - ${listingDetail?.address}`;
+        const propertyName = listingDetail?.name;
 
         // console.log(buyerEmail)
         // console.log(agentEmail)

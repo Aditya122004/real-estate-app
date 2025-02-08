@@ -19,9 +19,9 @@ export async function POST(req) {
       },
     });
 
-    // Email options
+    // Email options : `"${buyerName}" <${buyerEmail}>`
     const mailOptions = {
-      from: `"${buyerName}" <${buyerEmail}>`,
+      from: `"A&A House Hunt" <${buyerEmail}>`,
       to: agentEmail,
       subject: `Inquiry about ${propertyName}`,
       html: emailHtml, // Rendered HTML email template

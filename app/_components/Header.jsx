@@ -23,7 +23,7 @@ function Header() {
     <div className="shadow-lg flex items-center justify-between sm:px-4 px-2 py-4 fixed top-0 w-full z-10 bg-white">
       <div className="flex gap-12 items-center">
         <Link href={"/"}>
-          <Image src={"/logo.svg"} width={150} height={150} alt="Logo" />
+          <Image src={"/rsw-logo-4.svg"} width={150} height={150} alt="Logo" />
         </Link>
 
         {/* Desktop Navigation */}
