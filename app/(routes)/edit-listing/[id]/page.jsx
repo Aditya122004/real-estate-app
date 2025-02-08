@@ -81,6 +81,7 @@ function EditListing() {
       const id = params.id;
       await updateListing(
         id,
+        formValue.name,
         formValue.type,
         formValue.propertyType,
         formValue.bedroom,
@@ -121,6 +122,7 @@ function EditListing() {
       <Formik
         enableReinitialize
         initialValues={{
+          name:listing?.name||"",
           type: listing?.type || "Sell",
           propertyType: listing?.propertyType || "",
           bedroom: listing?.bedroom || 0,
@@ -143,6 +145,15 @@ function EditListing() {
           <form onSubmit={handleSubmit}>
             <div className="bx-sd p-5 rounded-lg grid gap-7 mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              <div className="flex gap-2 flex-col">
+                  <h2 className="text-gray-500">Property Name</h2>
+                  <Input
+                    defaultValue={listing?.name}
+                    placeholder="Enter Property Name"
+                    name="name"
+                    onChange={handleChange}
+                  />
+                </div>
                 <div className="flex flex-col gap-2 mb-[18px]">
                   <h2 className=" text-slate-500">Rent or Sell?</h2>
                   <RadioGroup

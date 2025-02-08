@@ -22,10 +22,11 @@ export const addListing = async (address, coordinates, createdBy) => {
         throw error
     }
 };
-export const updateListing=async(id,type,propertyType,bedroom,bathroom,builtIn,parking,lotSize,area,price ,hoa ,description,
+export const updateListing=async(id,name,type,propertyType,bedroom,bathroom,builtIn,parking,lotSize,area,price ,hoa ,description,
     profileImage,fullName)=>{
     try{
         await setDoc(doc(db,'listing',id),{
+            name,
             type,
             propertyType,
             bedroom,
