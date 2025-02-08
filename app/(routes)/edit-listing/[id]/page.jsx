@@ -116,7 +116,7 @@ function EditListing() {
   };
   return (
     <div className="px-[18px] sm:px-10 md:px-36 my-10">
-      <h2 className="font-bold text-2xl">
+      <h2 className="font-bold text-2xl mt-[100px]">
         Enter some more details about your listing
       </h2>
       <Formik
@@ -151,6 +151,7 @@ function EditListing() {
                     defaultValue={listing?.name}
                     placeholder="Enter Property Name"
                     name="name"
+                    className="w-[90%]"
                     onChange={handleChange}
                   />
                 </div>

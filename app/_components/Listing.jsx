@@ -110,9 +110,10 @@ function Listing({
                       alt="Property Image"
                     />
                     <div className="flex mt-2 gap-2 flex-col">
-                      <h2 className="font-bold text-l">${item?.price}</h2>
-                      <h2 className="flex gap-2 text-sm text-gray-400">
-                        <MapPin className="h-4 w-4" />
+                      <h2 className="font-semibold text-md text-[#7f57f1]">{item?.name}</h2>
+                      <h2 className="font-bold text-lg">${item?.price}</h2>
+                      <h2 className="flex gap-2 text-sm text-gray-400 items-center">
+                        <MapPin className="h-[14px] w-[14px]" />
                         {item?.address.length > 50
                           ? `${item.address.slice(
                               0,

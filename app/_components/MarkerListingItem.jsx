@@ -9,13 +9,21 @@ export default function MarkerListingItem({item,closeHandler}) {
     <div>
         <div className=" cursor-pointer rounded-lg  w-[180px]">
             <X onClick={closeHandler}/>
-    <Image
-      src={item?.images[0]}
-      width={800}
-      height={150}
-      className="rounded-lg object-cover h-[120px] w-[180px]"
-      alt="Property Image"
-    />
+        {item?.images[0] ?
+          <Image
+                src={item?.images[0]}
+                width={800}
+                height={150}
+                className="rounded-lg object-cover h-[120px] w-[180px]"
+                alt="Property Image"
+          /> :
+          <Image
+                src={"/house-avatar-2.jpg" }
+                width={800}
+                height={150}
+                className="rounded-lg object-contain h-[120px] w-[180px]"
+                alt="Property Image"
+              />}
     <div className="bg-white flex mt-2 gap-2 p-2 flex-col">
       <h2 className="font-bold text-l">${item?.price}</h2>
       <h2 className="flex gap-2 text-sm text-gray-400">

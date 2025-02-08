@@ -34,7 +34,8 @@ function Details({ listingDetail, imageList }) {
     listingDetail && (
       <div className="my-6 flex flex-col gap-4 sm:gap-2">
         <div className="flex justify-between items-center">
-          <div>
+          <div className="flex flex-col gap-1">
+            <h2 className="font-semibold text-2xl mb-2 sm:mb-1 text-[#7f57f1]">{listingDetail?.name}</h2>
             <h2 className="font-bold text-3xl mb-2 sm:mb-1">${listingDetail?.price}</h2>
             <h2 className="text-gray-500 sm:text-md font-thin sm:font-light flex gap-2">
               <MapPin />

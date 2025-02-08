@@ -20,7 +20,7 @@ function Header() {
   const { user, isSignedIn } = useUser();
 
   return (
-    <div className="shadow-lg flex items-center justify-between sm:px-4 px-2 py-4 fixed top-0 w-full z-10 bg-white">
+    <div className="shadow-lg flex items-center justify-between sm:px-4 sm:py-3 px-2 py-4 fixed top-0 w-full z-10 bg-white">
       <div className="flex gap-12 items-center">
         <Link href={"/"}>
           <Image src={"/rsw-logo-4.svg"} width={150} height={150} alt="Logo" />
@@ -34,7 +34,7 @@ function Header() {
                 path == "/" ? "text-primary" : ""
               }`}
             >
-              For Sell
+              For Sale
             </li>
           </Link>
           <Link href={"/rent"}>
@@ -109,7 +109,7 @@ function Header() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-48 space-y-1">
                   <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
-                    <Link href="/">For Sell</Link>
+                    <Link href="/">For Sale</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
                     <Link href="/rent">For Rent</Link>

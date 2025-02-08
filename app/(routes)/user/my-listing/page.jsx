@@ -55,13 +55,13 @@ export default function MyListing() {
         }
   return (
     <div>
-      <h2 className="font-bold text-2xl ms-2">Manage Your Listings</h2>
+      <h2 className="font-bold text-2xl ms-2 mt-[120px] sm:mt-[100px]">Manage Your Listings</h2>
       {/* grid grid-cols-1 md:grid-cols-2 gap-3 */}
-      <div className="flex flex-wrap p-3 justify-center lg:justify-between lg:items-center lg:py-3 lg:px-[30px] lg:gap-[30px] lg:mb-0 xl:gap-[10px] xl:p-3">
+      <div className="flex flex-wrap p-3 justify-center lg:py-2 lg:px-[30px] lg:justify-normal lg:gap-[30px] lg:mb-0 xl:gap-[14px] xl:px-[20px] xl:py-4">
         {listingData &&
           listingData.map((item, index) => (
             <div
-              className="bx-sd my-4 w-[370px] lg:w-[450px] xl:h-[350px] xl:w-[400px] p-3 hover:border hover:border-primary cursor-pointer rounded-lg "
+              className="bx-sd my-4 w-[370px] lg:w-[450px] h-auto xl:w-[390px] p-3 hover:border hover:border-primary cursor-pointer rounded-lg "
               key={index}
             >
               <h2 className="bg-primary text-white absolute px-2 text-sm p-1 m-1 rounded-lg">
@@ -75,6 +75,7 @@ export default function MyListing() {
                 alt="Property Image"
               />
               <div className="flex mt-2 gap-2 flex-col">
+                <h2 className="font-semibold text-md text-[#7f57f1]">{item?.name}</h2>
                 <h2 className="font-bold text-l">${item?.price}</h2>
                 <h2 className="flex gap-2 text-sm text-gray-400">
                   <MapPin className="h-4 w-4" />
