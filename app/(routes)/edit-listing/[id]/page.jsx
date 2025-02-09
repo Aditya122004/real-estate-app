@@ -158,8 +158,9 @@ function EditListing() {
                 <div className="flex flex-col gap-2 sm:mb-0 mb-[20px]">
                   <h2 className="text-base text-slate-500">Rent or Sell?</h2>
                   <RadioGroup
-                    onValueChange={(value) => setFieldValue("type", value)}
-                    defaultValue={listing?.type || "Sell"}
+                     value={values.type}
+                     onValueChange={(value) => setFieldValue("type", value)}
+                     defaultValue={listing?.type}
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="Rent" id="Rent" />
