@@ -1,15 +1,19 @@
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { useUser } from '@clerk/nextjs';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { Loader } from "lucide-react";
+import { toast } from 'sonner';
 
 export default function AgentDetail({ listingDetail }) {
   const { user } = useUser();
   const router = useRouter();
+  const [loading , setLoading] = useState(false)
   
   const handleEnquiryEmailSending = async () => {
+    setLoading(true)
       if (user) {
         const buyerEmail = user?.primaryEmailAddress.emailAddress;
         const agentEmail = listingDetail?.createdBy;
@@ -29,18 +33,30 @@ export default function AgentDetail({ listingDetail }) {
           });
 
           if (response.status === 200) {
-            alert('Enquiry email sent successfully!')
-            console.log('Enquiry email sent successfully:', response.data);
+            setLoading(false)
             // Optionally, show a success notification to the user
+            toast('Enquiry email sent successfully!', {
+              description: "A mail has been sent to the agent about your enquiry.",
+              action: {
+                label: "Ok",
+                onClick: () => console.log("Message Read"),
+              },
+            })
+            // alert('Enquiry email sent successfully!')
+            console.log('Enquiry email sent successfully:', response.data);
           } else {
-            alert('Failed to send enquiry email!')
+            setLoading(false)
+            toast('Failed to send enquiry email!')
+            // alert('Failed to send enquiry email!')
             console.error('Failed to send enquiry email:', response.data);
           }
         } catch (error) {
+          setLoading(false)
           console.error('Error sending enquiry email:', error.response?.data || error.message);
         }
 
       } else {
+        setLoading(false)
         router.push("/sign-in")
       }
   }
@@ -54,7 +70,7 @@ export default function AgentDetail({ listingDetail }) {
           <h2 className='text-lg font-bold'>{listingDetail?.fullName}</h2>
           <h2 className='text-gray-500'>{listingDetail?.createdBy}</h2></div>
           
-        <Button onClick={handleEnquiryEmailSending} className="bx-sd w-full">Send Message</Button>
+        <Button onClick={handleEnquiryEmailSending} className="bx-sd w-full">{loading ? <Loader/> : "Send Message"}</Button>
       </div>
     
     </div>

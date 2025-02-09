@@ -145,7 +145,7 @@ function EditListing() {
           <form onSubmit={handleSubmit}>
             <div className="bx-sd p-5 rounded-lg grid gap-7 mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              <div className="flex gap-2 flex-col">
+              <div className="flex gap-2 flex-col mb-4 sm:mb-0">
                   <h2 className="text-gray-500">Property Name</h2>
                   <Input
                     defaultValue={listing?.name}
@@ -155,7 +155,7 @@ function EditListing() {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="flex flex-col gap-2 mb-[18px]">
+                <div className="flex flex-col gap-2 sm:mb-0 mb-[20px]">
                   <h2 className=" text-slate-500">Rent or Sell?</h2>
                   <RadioGroup
                     onValueChange={(value) => setFieldValue("type", value)}
@@ -310,7 +310,7 @@ function EditListing() {
                   type="submit"
                   disabled={loading}
                   variant="outline"
-                  className="text-primary border-primary hover:bg-[#7f57f1] hover:text-white hover:shadow-xl"
+                  className="text-primary border-primary hover:bg-[#7f57f1] hover:text-white hover:shadow-xl me-[-10px]"
                 >
                   {loading ? <Loader /> : "Save"}
                 </Button>

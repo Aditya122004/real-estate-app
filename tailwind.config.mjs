@@ -11,6 +11,8 @@ export default {
   	extend: {
 		fontFamily: {
 			sans: ['Plus Jakarta Sans', 'sans-serif'], 
+			playfair: ['Playfair Display SC', "serif"],
+			cormorant: ["Cormorant Garamond" , "serif"]
 		  },
   		colors: {
   			background: 'hsl(var(--background))',

@@ -48,8 +48,9 @@ export default function FileUpload({setImages,img}) {
                 <Image src={image} width={100} height={100} className='rounded-lg object-cover h-[100px] w-[100px]' alt={index}/>
             </div>
         ))}
-    </div>
-    {img &&<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-10 gap-3 mt-3">
+      </div>
+      {/* grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-10 */}
+    {img &&<div className="flex flex-wrap px-3 gap-3 mt-3">
         { img.map((image,index)=>(
             <div key={index}>
                 <Image src={image?.url} width={100} height={100} className='rounded-lg object-cover h-[100px] w-[100px]' alt={index}/>
