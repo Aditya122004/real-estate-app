@@ -26,7 +26,7 @@ export default function MarkerListingItem({item,closeHandler}) {
               />}
     <div className="bg-white flex mt-2 gap-2 p-2 flex-col">
       <h2 className="font-bold text-l">${item?.price}</h2>
-      <h2 className="flex gap-2 text-sm text-gray-400">
+      <h2 className="flex font-cormorant gap-2 text-sm text-gray-400">
         <MapPin className="h-4 w-4" />
         {item?.address.length > 50
           ? `${item.address.slice(

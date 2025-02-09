@@ -20,6 +20,13 @@ html {
   font-style: semibold;
 }
 
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/Lato/Lato-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   font-family: 'Cormorant Garamond', serif;
 }

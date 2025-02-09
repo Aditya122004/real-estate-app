@@ -9,10 +9,12 @@ export default {
   ],
   theme: {
   	extend: {
-		fontFamily: {
+		  fontFamily: {
+			intersans: ['Inter', 'sans-serif'],
 			sans: ['Plus Jakarta Sans', 'sans-serif'], 
-			playfair: ['Playfair Display SC', "serif"],
-			cormorant: ["Cormorant Garamond" , "serif"]
+			cormorant: ["Cormorant Garamond", "serif"],
+			roboto: ['Roboto', 'sans-serif'],
+			lato: ["Lato", "sans-serif"], 
 		  },
   		colors: {
   			background: 'hsl(var(--background))',

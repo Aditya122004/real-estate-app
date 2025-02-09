@@ -52,7 +52,7 @@ function Listing({
 
 
   return (
-    <div className="w-full mt-[-15px] sm:mt-0">
+    <div className="w-full mt-[15px] sm:mt-0">
       <div className="flex items-center justify-between gap-[16px] sm:gap-6">
         <GoogleAddressSearch
           className="flex items-center justify-around"
@@ -67,7 +67,7 @@ function Listing({
             handleSearchClick();
             setAddress(add);
           }}
-          className="flex gap-2 py-2 sm:py-4 sm:px-[35px] px-[32px] w-[40px] text-center bx-sd"
+          className="flex text-md gap-2 py-2 sm:py-4 sm:px-[35px] px-[32px] w-[40px] text-center bx-sd"
         >
           Search
         </Button>
@@ -109,10 +109,10 @@ function Listing({
                       className="rounded-lg object-cover h-[170px]"
                       alt="Property Image"
                     />
-                    <div className="flex mt-2 gap-2 flex-col">
-                      <h2 className="font-semibold text-md text-[#7f57f1]">{item?.name}</h2>
-                      <h2 className="font-bold text-lg">${item?.price}</h2>
-                      <h2 className="flex gap-2 text-sm text-gray-400 items-center">
+                    <div className="flex mt-2 gap-[6px] flex-col">
+                        <h2 className="font-semibold text-xl text-[#7f57f1]">{item?.name}</h2>
+                        <h2 className="font-semibold text-lg font-sans">${item?.price}</h2>
+                        <h2 className="flex gap-2 text-base items-center text-gray-400">
                         <MapPin className="h-[14px] w-[14px]" />
                         {item?.address.length > 50
                           ? `${item.address.slice(
@@ -122,15 +122,15 @@ function Listing({
                           : item.address}
                       </h2>
                       <div className="flex gap-2 mt-2 justify-between">
-                        <h2 className="flex gap-2 text-sm w-full bg-slate-200 rounded-md p-2 item-centre text-gray-500 justify-center">
+                        <h2 className="flex font-sans gap-2 text-sm w-full bg-slate-200 rounded-md p-2 items-center text-gray-500 justify-center">
                           <BedDouble className="h-4 w-4" />
                           {item?.bedroom}
                         </h2>
-                        <h2 className="flex gap-2 w-full text-sm bg-slate-200 rounded-md p-2 item-centre text-gray-500 justify-center">
+                        <h2 className="flex font-sans gap-2 w-full text-sm bg-slate-200 rounded-md p-2 item-centre text-gray-500 justify-center">
                           <BathIcon className="h-4 w-4" />
                           {item?.bathroom}
                         </h2>
-                        <h2 className="flex gap-2 w-full text-sm bg-slate-200 rounded-md p-2 item-centre text-gray-500 justify-center">
+                        <h2 className="flex font-sans gap-2 w-full text-sm bg-slate-200 rounded-md p-2 item-centre text-gray-500 justify-center">
                           <Ruler className="h-4 w-4" />
                           {item?.area}
                         </h2>

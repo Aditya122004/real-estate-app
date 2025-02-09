@@ -22,7 +22,7 @@ function Header() {
   return (
     <div className="shadow-lg flex items-center justify-between sm:px-4 sm:py-3 px-2 py-4 fixed top-0 w-full z-10 bg-white">
       <div className="flex gap-12 items-center">
-        <Link href={"/"}>
+        <Link className="ms-[-10px] sm:ms-[-8px]" href={"/"}>
           <Image src={"/rsw-logo-4.svg"} width={150} height={150} alt="Logo" />
         </Link>
 
@@ -30,7 +30,7 @@ function Header() {
         <ul className="hidden sm:flex gap-10">
           <Link href={"/"}>
             <li
-              className={`hover:text-primary font-medium text-sm cursor-pointer ${
+              className={`hover:text-primary font-medium text-md cursor-pointer ${
                 path == "/" ? "text-primary" : ""
               }`}
             >
@@ -39,7 +39,7 @@ function Header() {
           </Link>
           <Link href={"/rent"}>
             <li
-              className={`hover:text-primary font-medium text-sm cursor-pointer ${
+              className={`hover:text-primary font-medium text-md cursor-pointer ${
                 path == "/rent" ? "text-primary" : ""
               }`}
             >
@@ -48,7 +48,7 @@ function Header() {
           </Link>
           <Link href={"/user/my-listing"}>
             <li
-              className={`hover:text-primary font-medium text-sm cursor-pointer ${
+              className={`hover:text-primary font-medium text-md cursor-pointer ${
                 path == "/user/my-listing" ? "text-primary" : ""
               }`}
             >
@@ -82,17 +82,17 @@ function Header() {
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-48 space-y-1">
-                <DropdownMenuLabel className="font-semibold text-gray-700">
+                <DropdownMenuLabel className="font-semibold text-gray-700 text-lg">
                   My Account
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
-                  <Link href="/user" className="w-full">
+                  <Link href="/user" className="w-full text-lg">
                     Profile
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
-                  <SignOutButton className="w-full text-left text-red-600 hover:text-red-700">
+                  <SignOutButton className="w-full text-left text-red-600 hover:text-red-700 text-lg">
                     Log Out
                   </SignOutButton>
                 </DropdownMenuItem>
@@ -107,7 +107,7 @@ function Header() {
                     <Menu className="h-6 w-6" />
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-48 space-y-1">
+                <DropdownMenuContent className="w-48 space-y-1 text-lg">
                   <DropdownMenuItem className="cursor-pointer hover:bg-gray-100">
                     <Link href="/">For Sale</Link>
                   </DropdownMenuItem>
@@ -123,7 +123,7 @@ function Header() {
           </div>
         ) : (
           <Link href={"/sign-in"}>
-            <Button variant="outline">Login</Button>
+            <Button className="text-md" variant="outline">Login</Button>
           </Link>
         )}
       </div>

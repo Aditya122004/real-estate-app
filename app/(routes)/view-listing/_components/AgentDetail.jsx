@@ -68,9 +68,9 @@ export default function AgentDetail({ listingDetail }) {
         <div className='flex items-center gap-6 '>
           <Image src={listingDetail?.profileImage ? listingDetail?.profileImage : "/user-avatar.jpg"} alt='Profile Image' width={60} height={60} className='rounded-full'/>
           <h2 className='text-lg font-bold'>{listingDetail?.fullName}</h2>
-          <h2 className='text-gray-500'>{listingDetail?.createdBy}</h2></div>
+          <h2 className='text-gray-500 text-base'>{listingDetail?.createdBy}</h2></div>
           
-        <Button onClick={handleEnquiryEmailSending} className="bx-sd w-full">{loading ? <Loader/> : "Send Message"}</Button>
+        <Button onClick={handleEnquiryEmailSending} className="bx-sd w-full text-base">{loading ? <Loader/> : "Send Message"}</Button>
       </div>
     
     </div>

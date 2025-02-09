@@ -74,11 +74,11 @@ export default function MyListing() {
                 className="rounded-lg object-cover h-[170px]"
                 alt="Property Image"
               />
-              <div className="flex mt-2 gap-2 flex-col">
-                <h2 className="font-semibold text-md text-[#7f57f1]">{item?.name}</h2>
-                <h2 className="font-bold text-l">${item?.price}</h2>
-                <h2 className="flex gap-2 text-sm text-gray-400">
-                  <MapPin className="h-4 w-4" />
+              <div className="flex mt-2 gap-[6px] flex-col">
+                <h2 className="font-semibold text-xl text-[#7f57f1]">{item?.name}</h2>
+                <h2 className="font-semibold text-lg font-sans">${item?.price}</h2>
+                <h2 className="flex gap-2 text-base items-center text-gray-400">
+                  <MapPin className="h-[14px] w-[14px]" />
                   {item?.address.length > 50
                     ? `${item.address.slice(
                         0,
@@ -87,27 +87,27 @@ export default function MyListing() {
                     : item.address}
                 </h2>
                 <div className="flex gap-2 mt-2 justify-between">
-                  <h2 className="flex gap-2 text-sm w-full bg-slate-200 rounded-md p-2 item-centre text-gray-500 justify-center">
+                  <h2 className="flex font-sans gap-2 text-sm w-full bg-slate-200 rounded-md p-2 items-center text-gray-500 justify-center">
                     <BedDouble className="h-4 w-4" />
                     {item?.bedroom}
                   </h2>
-                  <h2 className="flex gap-2 w-full text-sm bg-slate-200 rounded-md p-2 item-centre text-gray-500 justify-center">
+                  <h2 className="flex font-sans gap-2 w-full text-sm bg-slate-200 rounded-md p-2 item-centre text-gray-500 justify-center">
                     <BathIcon className="h-4 w-4" />
                     {item?.bathroom}
                   </h2>
-                  <h2 className="flex gap-2 w-full text-sm bg-slate-200 rounded-md p-2 item-centre text-gray-500 justify-center">
+                  <h2 className="flex font-sans gap-2 w-full text-sm bg-slate-200 rounded-md p-2 item-centre text-gray-500 justify-center">
                     <Ruler className="h-4 w-4" />
                     {item?.area}
                   </h2>
                 </div>
                 <div className="flex gap-2">
                   <Link href={"/view-listing/" + item.id} className="w-full">
-                    <Button size="sm" className="w-full" variant="outline">
+                    <Button size="sm" className="w-full text-base" variant="outline">
                       View
                     </Button>
                   </Link>
                   <Link href={"/edit-listing/" + item.id} className="w-full">
-                    <Button size="sm" className="bx-sd w-full">
+                    <Button size="sm" className="bx-sd w-full text-base">
                       Edit
                     </Button>
                   </Link>

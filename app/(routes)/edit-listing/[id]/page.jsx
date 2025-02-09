@@ -142,32 +142,32 @@ function EditListing() {
         }}
       >
         {({ values, handleChange, handleSubmit, setFieldValue }) => (
-          <form onSubmit={handleSubmit}>
+          <form className="text-base" onSubmit={handleSubmit}>
             <div className="bx-sd p-5 rounded-lg grid gap-7 mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               <div className="flex gap-2 flex-col mb-4 sm:mb-0">
-                  <h2 className="text-gray-500">Property Name</h2>
+                  <h2 className="text-gray-500 text-base">Property Name</h2>
                   <Input
                     defaultValue={listing?.name}
+                    className="font-sans text-sm w-[90%]"
                     placeholder="Enter Property Name"
                     name="name"
-                    className="w-[90%]"
                     onChange={handleChange}
                   />
                 </div>
                 <div className="flex flex-col gap-2 sm:mb-0 mb-[20px]">
-                  <h2 className=" text-slate-500">Rent or Sell?</h2>
+                  <h2 className="text-base text-slate-500">Rent or Sell?</h2>
                   <RadioGroup
                     onValueChange={(value) => setFieldValue("type", value)}
                     defaultValue={listing?.type || "Sell"}
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="Rent" id="Rent" />
-                      <Label htmlFor="Rent">Rent</Label>
+                      <Label className="text-base" htmlFor="Rent">Rent</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="Sell" id="Sell" />
-                      <Label htmlFor="Sell">Sell</Label>
+                      <Label className="text-base" htmlFor="Sell">Sell</Label>
                     </div>
                   </RadioGroup>
                 </div>
@@ -179,8 +179,9 @@ function EditListing() {
                     }
                     name="propertyType"
                     defaultValue={listing?.propertyType}
+                    className="font-sans"
                   >
-                    <SelectTrigger className="w-[180px]">
+                    <SelectTrigger className="w-[180px] font-sans text-sm">
                       <SelectValue
                         placeholder={
                           listing?.propertyType || "Select Property Type"
@@ -188,19 +189,20 @@ function EditListing() {
                       />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Single Family House">
+                      <SelectItem className="font-sans text-sm" value="Single Family House">
                         Single Family House
                       </SelectItem>
-                      <SelectItem value="Town House">Town House</SelectItem>
-                      <SelectItem value="Condo">Condo</SelectItem>
+                      <SelectItem className="font-sans text-sm" value="Town House">Town House</SelectItem>
+                      <SelectItem className="font-sans text-sm" value="Condo">Condo</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <div className="flex gap-2 flex-col">
-                  <h2 className="text-gray-500">Bedroom</h2>
+                  <h2 className="text-gray-500 text-base">Bedroom</h2>
                   <Input
+                    className="text-sm font-sans font-thin"
                     defaultValue={listing?.bedroom}
                     type="number"
                     placeholder="2"
@@ -209,8 +211,9 @@ function EditListing() {
                   />
                 </div>
                 <div className="flex gap-2 flex-col">
-                  <h2 className="text-gray-500">BathRoom</h2>
+                  <h2 className="text-gray-500 text-base">BathRoom</h2>
                   <Input
+                    className="text-sm font-sans font-thin"
                     defaultValue={listing?.bathroom}
                     type="number"
                     placeholder="1"
@@ -219,8 +222,9 @@ function EditListing() {
                   />
                 </div>
                 <div className="flex gap-2 flex-col">
-                  <h2 className="text-gray-500">Built In</h2>
+                  <h2 className="text-gray-500 text-base">Built In</h2>
                   <Input
+                    className="text-sm font-sans font-thin"
                     defaultValue={listing?.builtIn}
                     type="number"
                     placeholder="2000"
@@ -231,8 +235,9 @@ function EditListing() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <div className="flex gap-2 flex-col">
-                  <h2 className="text-gray-500">Parking</h2>
+                  <h2 className="text-gray-500 text-base">Parking</h2>
                   <Input
+                   className="text-sm font-sans font-thin"
                     defaultValue={listing?.parking}
                     type="number"
                     placeholder="2"
@@ -241,8 +246,9 @@ function EditListing() {
                   />
                 </div>
                 <div className="flex gap-2 flex-col">
-                  <h2 className="text-gray-500">Lot Size (Sq.Ft)</h2>
+                  <h2 className="text-gray-500 text-base">Lot Size (Sq.Ft)</h2>
                   <Input
+                    className="text-sm font-sans font-thin"
                     defaultValue={listing?.lotSize}
                     type="number"
                     placeholder="1"
@@ -251,8 +257,9 @@ function EditListing() {
                   />
                 </div>
                 <div className="flex gap-2 flex-col">
-                  <h2 className="text-gray-500">Area (Sq.Ft)</h2>
+                  <h2 className="text-gray-500 text-base">Area (Sq.Ft)</h2>
                   <Input
+                    className="text-sm font-sans font-thin"
                     defaultValue={listing?.area}
                     type="number"
                     placeholder="2000"
@@ -263,8 +270,9 @@ function EditListing() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <div className="flex gap-2 flex-col">
-                  <h2 className="text-gray-500">Selling Price($)</h2>
+                  <h2 className="text-gray-500 text-base">Selling Price($)</h2>
                   <Input
+                    className="text-sm font-sans font-thin"
                     defaultValue={listing?.price}
                     type="number"
                     placeholder="5000000"
@@ -273,8 +281,9 @@ function EditListing() {
                   />
                 </div>
                 <div className="flex gap-2 flex-col">
-                  <h2 className="text-gray-500">HOA (Per Month) ($)</h2>
+                  <h2 className="text-gray-500 text-base">HOA (Per Month) ($)</h2>
                   <Input
+                    className="text-[2px] font-sans font-thin"
                     defaultValue={listing?.hoa}
                     type="number"
                     placeholder="100"
@@ -290,6 +299,7 @@ function EditListing() {
                     defaultValue={listing?.description}
                     placeholder="Enter Description"
                     name="description"
+                    className="font-sans text-sm"
                     onChange={handleChange}
                   />
                 </div>
@@ -310,14 +320,14 @@ function EditListing() {
                   type="submit"
                   disabled={loading}
                   variant="outline"
-                  className="text-primary border-primary hover:bg-[#7f57f1] hover:text-white hover:shadow-xl me-[-10px]"
+                  className="text-primary text-base border-primary hover:bg-[#7f57f1] hover:text-white hover:shadow-xl me-[-10px]"
                 >
                   {loading ? <Loader /> : "Save"}
                 </Button>
 
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button className="bx-sd" type="button" disabled={loading}>
+                    <Button className="bx-sd text-base" type="button" disabled={loading}>
                       {loading ? <Loader /> : "Save & Publish"}
                     </Button>
                   </AlertDialogTrigger>

@@ -36,13 +36,13 @@ function Details({ listingDetail, imageList }) {
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-1">
             <h2 className="font-semibold text-2xl mb-2 sm:mb-1 text-[#7f57f1]">{listingDetail?.name}</h2>
-            <h2 className="font-bold text-3xl mb-2 sm:mb-1">${listingDetail?.price}</h2>
-            <h2 className="text-gray-500 sm:text-md font-thin sm:font-light flex gap-2">
-              <MapPin />
+            <h2 className="font-semibold text-3xl mb-2 font-sans sm:mb-1">${listingDetail?.price}</h2>
+            <h2 className="text-gray-500 sm:text-base font-thin sm:font-light flex items-center gap-2">
+              <MapPin className="h-4 w-4" />
               {listingDetail?.address}
             </h2>
           </div>
-          <Button className="flex gap-2 bx-sd" onClick={shareBtnHandler}>
+          <Button className="flex gap-2 bx-sd text-base" onClick={shareBtnHandler}>
             <Share />
             Share
           </Button>
@@ -79,7 +79,7 @@ function Details({ listingDetail, imageList }) {
         </div>
         <div className="my-4">
           <h2 className="text-2xl font-bold">What's Special</h2>
-          <p className="text-gray-600 mt-1">{listingDetail?.description}</p>
+          <p className="text-gray-600 mt-1 text-lg">{listingDetail?.description}</p>
         </div>
         <div>
           <h2 className="text-2xl mb-2 font-bold">Find On Map</h2>
