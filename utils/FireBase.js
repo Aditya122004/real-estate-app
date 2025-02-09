@@ -103,7 +103,11 @@ export const publishListingFirebase=async(id)=>{
 
 export const getListingHome=async(type)=>{
     const docRef = collection(db, "listing");
-    const q = query(docRef, where("active", "==", true),where("type","==",type))
+    const queryConditions = [
+        where("active", "==", true),
+        where("type", "==", type)
+    ]
+    const q = query(docRef, ...queryConditions);
     const querySnapshot = await getDocs(q)
     if (!querySnapshot.empty) {
         return Promise.all(querySnapshot.docs.map(async (doc) => { 

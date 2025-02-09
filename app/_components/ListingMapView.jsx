@@ -4,8 +4,10 @@ import Listing from "./Listing";
 import { getListingHome, searchListing } from "@/utils/FireBase";
 import { toast } from "sonner";
 import GoogleMapSection from "./GoogleMapSection";
+import { useUser } from "@clerk/nextjs";
 
 function ListingMapView({ type }) {
+  const {user}=useUser()
   const [clicked, setClicked] = useState(false);
   const [bedCount, setBedCount] = useState(0);
   const [bathCount, setBathCount] = useState(0);
@@ -16,7 +18,7 @@ function ListingMapView({ type }) {
   const [coordinates, setCoordinates] = useState();
   useEffect(() => {
     getLatestListing();
-  }, []);
+  }, [user]);
   const handleSearchClick = async () => {
     try {
       setClicked(true);
@@ -37,7 +39,15 @@ function ListingMapView({ type }) {
       if (!data) {
         toast("No results found");
       }
-      setListingData(data);
+      if (data) {
+        const filteredData = user 
+          ? data.filter(item => item.createdBy !== user.primaryEmailAddress.emailAddress)
+          : data;
+          setListingData(filteredData);
+      }else{
+        setListingData(data)
+      }
+      
     } catch (error) {
       setClicked(false);
       console.error("Search error:", error);
@@ -58,7 +68,14 @@ function ListingMapView({ type }) {
       resultArray.map((key, value) => {
         arr.push(key.value);
       });
-      setListingData(arr);
+      if (arr) {
+        const filteredData = user 
+          ? data.filter(item => item.createdBy !== user.primaryEmailAddress.emailAddress)
+          : data;
+          setListingData(filteredData);
+      }else{
+        setListingData(arr)
+      }
     } catch (error) {
       console.log(error);
       toast("Error in fetching listings");
