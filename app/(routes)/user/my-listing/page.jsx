@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 
 export default function MyListing() {
     const {user}=useUser()
-        const[listingData,setListingData]=useState()
+    const[listingData,setListingData]=useState()
         useEffect(()=>{
             user&&getUserListing()
         },[user])
@@ -76,7 +76,10 @@ export default function MyListing() {
               />
               <div className="flex mt-2 gap-[6px] flex-col">
                 <h2 className="font-semibold text-xl text-[#7f57f1]">{item?.name}</h2>
-                <h2 className="font-semibold text-lg font-sans">${item?.price}</h2>
+                {item?.type === "Rent" ?
+                  <h2 className="font-semibold text-lg font-sans">${item?.price} / month</h2> :
+                  <h2 className="font-semibold text-lg font-sans">${item?.price}</h2>
+                }
                 <h2 className="flex gap-2 text-base items-center text-gray-400">
                   <MapPin className="h-[14px] w-[14px]" />
                   {item?.address.length > 50

@@ -271,7 +271,7 @@ function EditListing() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <div className="flex gap-2 flex-col">
-                  <h2 className="text-gray-500 text-base">Selling Price($)</h2>
+                  <h2 className="text-gray-500 text-base">Selling Price / Rent Per Month($)</h2>
                   <Input
                     className="text-sm font-sans font-thin"
                     defaultValue={listing?.price}

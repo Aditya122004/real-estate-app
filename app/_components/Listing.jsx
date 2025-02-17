@@ -38,6 +38,7 @@ function Listing({
      if (listing && listing.length > 0) {
        setSafeListing(listing);
        setHasFetched(true);
+      //  console.log(listing)
      } else {
        setSafeListing([]);
        setHasFetched(false);
@@ -111,7 +112,10 @@ function Listing({
                     />
                     <div className="flex mt-2 gap-[6px] flex-col">
                         <h2 className="font-semibold text-xl text-[#7f57f1]">{item?.name}</h2>
+                      {item?.type === "Rent" ?
+                        <h2 className="font-semibold text-lg font-sans">${item?.price} / month</h2> :
                         <h2 className="font-semibold text-lg font-sans">${item?.price}</h2>
+                      }
                         <h2 className="flex gap-2 text-base items-center text-gray-400">
                         <MapPin className="h-[14px] w-[14px]" />
                         {item?.address.length > 50
