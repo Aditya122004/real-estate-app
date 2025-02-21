@@ -9,6 +9,16 @@ const GoogleAddressSearch = dynamic(() => import("./GoogleAddressSearch"), {
 import { Button } from "@/components/ui/button";
 import FilterSection from "./FilterSection";
 import Link from "next/link";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
 
 function Listing({
   listing,
@@ -27,6 +37,8 @@ function Listing({
   const [add, setAdd] = useState(null);
   const [hasFetched, setHasFetched] = useState(false);
   const [address, setAddress] = useState(null);
+  const itemsPerPage = 20;
+  const [currentPage, setCurrentPage] = useState(1);
 
   setTimeout(() => {
     setLoading(false)
@@ -50,6 +62,17 @@ function Listing({
    }
     storeListingData();
  }, [listing, hasFetched]);
+  
+  const totalPages = Math.ceil(safeListing.length / itemsPerPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const paginatedListings = safeListing.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
 
   return (
@@ -98,56 +121,90 @@ function Listing({
                   className="h-[230px] w-full bg-slate-200 animate-pulse rounded-lg"
                 ></div>
           ))) :
-            (safeListing.length > 0) ?
+            (paginatedListings.length > 0) ? 
             // Once loaded and there are listings, map through them
-              safeListing.map((item, index) => (
-                <Link href={'/view-listing/' + item.id} key={index}>
-                  <div className="p-3 bx-sd hover:border hover:border-primary cursor-pointer rounded-lg">
-                    <Image
-                      src={item?.images[0] || '/placeholder.svg'}
-                      width={800}
-                      height={150}
-                      className="rounded-lg object-cover h-[170px]"
-                      alt="Property Image"
-                    />
-                    <div className="flex mt-2 gap-[6px] flex-col">
-                        <h2 className="font-semibold text-xl text-[#7f57f1]">{item?.name}</h2>
-                      {item?.type === "Rent" ?
-                        <h2 className="font-semibold text-lg font-sans">${item?.price} / month</h2> :
-                        <h2 className="font-semibold text-lg font-sans">${item?.price}</h2>
-                      }
-                        <h2 className="flex gap-2 text-base items-center text-gray-400">
-                        <MapPin className="h-[14px] w-[14px]" />
-                        {item?.address.length > 50
-                          ? `${item.address.slice(
-                              0,
-                              item.address.lastIndexOf(" ", 47)
-                            )}...`
-                          : item.address}
-                      </h2>
-                      <div className="flex gap-2 mt-2 justify-between">
-                        <h2 className="flex font-sans gap-2 text-sm w-full bg-slate-200 rounded-md p-2 items-center text-gray-500 justify-center">
-                          <BedDouble className="h-4 w-4" />
-                          {item?.bedroom}
-                        </h2>
-                        <h2 className="flex font-sans gap-2 w-full text-sm bg-slate-200 rounded-md p-2 item-centre text-gray-500 justify-center">
-                          <BathIcon className="h-4 w-4" />
-                          {item?.bathroom}
-                        </h2>
-                        <h2 className="flex font-sans gap-2 w-full text-sm bg-slate-200 rounded-md p-2 item-centre text-gray-500 justify-center">
-                          <Ruler className="h-4 w-4" />
-                          {item?.area}
-                        </h2>
+                  paginatedListings.map((item, index) => (
+                    <Link href={'/view-listing/' + item.id} key={index}>
+                      <div className="p-3 bx-sd hover:border hover:border-primary cursor-pointer rounded-lg">
+                        <Image
+                          src={item?.images[0] || '/placeholder.svg'}
+                          width={800}
+                          height={150}
+                          className="rounded-lg object-cover h-[170px]"
+                          alt="Property Image"
+                        />
+                        <div className="flex mt-2 gap-[6px] flex-col">
+                          <h2 className="font-semibold text-xl text-[#7f57f1]">{item?.name}</h2>
+                          {item?.type === "Rent" ?
+                            <h2 className="font-semibold text-lg font-sans">${item?.price} / month</h2> :
+                            <h2 className="font-semibold text-lg font-sans">${item?.price}</h2>
+                          }
+                          <h2 className="flex gap-2 text-base items-center text-gray-400">
+                            <MapPin className="h-[14px] w-[14px]" />
+                            {item?.address.length > 50
+                              ? `${item.address.slice(
+                                0,
+                                item.address.lastIndexOf(" ", 47)
+                              )}...`
+                              : item.address}
+                          </h2>
+                          <div className="flex gap-2 mt-2 justify-between">
+                            <h2 className="flex font-sans gap-2 text-sm w-full bg-slate-200 rounded-md p-2 items-center text-gray-500 justify-center">
+                              <BedDouble className="h-4 w-4" />
+                              {item?.bedroom}
+                            </h2>
+                            <h2 className="flex font-sans gap-2 w-full text-sm bg-slate-200 rounded-md p-2 item-centre text-gray-500 justify-center">
+                              <BathIcon className="h-4 w-4" />
+                              {item?.bathroom}
+                            </h2>
+                            <h2 className="flex font-sans gap-2 w-full text-sm bg-slate-200 rounded-md p-2 item-centre text-gray-500 justify-center">
+                              <Ruler className="h-4 w-4" />
+                              {item?.area}
+                            </h2>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </Link>
-              )
-            ) : (
+                    </Link>
+                  ))
+                  : (
               // If data has been fetched and there are no listings, show this message.
               !hasFetched && <h2 className="mt-4 text-xl">No Properties Found!</h2>
             )}</>}
       </div>
+       {/* Pagination Component */}
+      {totalPages >= 1 && (
+        <Pagination className="mt-6 w-full text-lg">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                href="#"
+                onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
+                className="text-lg"
+              />
+            </PaginationItem>
+            {[...Array(totalPages)].map((_, idx) => (
+              <PaginationItem key={idx}>
+                <PaginationLink
+                  href="#"
+                  isActive={currentPage === idx + 1}
+                  onClick={() => handlePageChange(idx + 1)}
+                  className="text-lg"
+                >
+                  {idx + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            {totalPages > 3 && <PaginationEllipsis />}
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
+                className="text-lg"
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 }

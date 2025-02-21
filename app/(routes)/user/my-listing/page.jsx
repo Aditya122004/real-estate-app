@@ -9,15 +9,28 @@ import React, { useEffect, useState } from 'react'
 import DeleteDialog from './_components/DeleteDialog';
 import { deleteImages } from '@/utils/Supabase';
 import { toast } from 'sonner';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 
 export default function MyListing() {
-    const {user}=useUser()
-    const[listingData,setListingData]=useState()
-        useEffect(()=>{
-            user&&getUserListing()
-        },[user])
-        const getUserListing=async()=>{
+  const {user}=useUser()
+  const [listingData, setListingData] = useState()
+  const itemsPerPage = 24;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(()=>{
+        user&&getUserListing()
+  }, [user])
+  
+  const getUserListing=async()=>{
             try {
                 const data = await getUserListings(user?.primaryEmailAddress.emailAddress);
                 const resultArray = [];
@@ -52,14 +65,25 @@ export default function MyListing() {
             catch(error){
               toast('Error in Deleting Listing')
             }
-        }
+  }
+  
+  const totalPages = Math.ceil(listingData?.length / itemsPerPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const paginatedListings = listingData?.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
   return (
     <div>
       <h2 className="font-bold text-2xl ms-2 mt-[120px] sm:mt-[100px]">Manage Your Listings</h2>
       {/* grid grid-cols-1 md:grid-cols-2 gap-3 */}
       <div className="flex flex-wrap p-3 justify-center lg:py-2 lg:px-[30px] lg:justify-normal lg:gap-[30px] lg:mb-0 xl:gap-[14px] xl:px-[20px] xl:py-4">
-        {listingData &&
-          listingData.map((item, index) => (
+        {paginatedListings &&
+          paginatedListings.map((item, index) => (
             <div
               className="bx-sd my-4 w-[370px] lg:w-[450px] h-auto xl:w-[390px] p-3 hover:border hover:border-primary cursor-pointer rounded-lg "
               key={index}
@@ -122,6 +146,40 @@ export default function MyListing() {
               </div>
             </div>
           ))}
+        {/* Pagination Component */}
+      {totalPages >= 1 && (
+        <Pagination className="mt-6 w-full text-lg">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                href="#"
+                onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
+                className="text-lg"
+              />
+            </PaginationItem>
+            {[...Array(totalPages)].map((_, idx) => (
+              <PaginationItem key={idx}>
+                <PaginationLink
+                  href="#"
+                  isActive={currentPage === idx + 1}
+                  onClick={() => handlePageChange(idx + 1)}
+                  className="text-lg"
+                >
+                  {idx + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            {totalPages > 3 && <PaginationEllipsis />}
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
+                className="text-lg"
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
       </div>
     </div>
   );

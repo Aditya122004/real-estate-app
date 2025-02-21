@@ -52,27 +52,27 @@ function Details({ listingDetail, imageList }) {
         <div className="mt-4 flex flex-col gap-3">
           <h2 className="font-bold text-2xl">Key Features</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <h2 className="flex text-sm sm:text-base gap-2 items-center bg-purple-100 rounded-lg p-[12px] sm:p-[10px] text-primary justify-center">
+            <h2 className="flex text-sm font-sans gap-2 items-center bg-purple-100 rounded-lg p-[12px] sm:p-[10px] text-primary justify-center">
               <Home  />
               {listingDetail?.propertyType}
             </h2>
-            <h2 className="flex text-sm sm:text-base gap-2 items-center bg-purple-100 rounded-lg p-[12px] sm:p-[10px] text-primary justify-center">
+            <h2 className="flex text-sm font-sans gap-2 items-center bg-purple-100 rounded-lg p-[12px] sm:p-[10px] text-primary justify-center">
               <Drill />
               Built In {listingDetail?.builtIn}
             </h2>
-            <h2 className="flex text-sm sm:text-base gap-2 items-center bg-purple-100 rounded-lg p-[12px] sm:p-[10px] text-primary justify-center">
+            <h2 className="flex text-sm font-sans gap-2 items-center bg-purple-100 rounded-lg p-[12px] sm:p-[10px] text-primary justify-center">
               <LandPlot />
               {listingDetail?.area}
             </h2>
-            <h2 className="flex text-sm sm:text-base gap-2 items-center bg-purple-100 rounded-lg p-[12px] sm:p-[10px] text-primary justify-center">
+            <h2 className="flex text-sm font-sans gap-2 items-center bg-purple-100 rounded-lg p-[12px] sm:p-[10px] text-primary justify-center">
               <BedDouble />
               {listingDetail?.bedroom} Bed
             </h2>
-            <h2 className="flex text-sm sm:text-base gap-2 items-center bg-purple-100 rounded-lg p-[12px] sm:p-[10px] text-primary justify-center">
+            <h2 className="flex text-sm font-sans gap-2 items-center bg-purple-100 rounded-lg p-[12px] sm:p-[10px] text-primary justify-center">
               <Bath />
               {listingDetail?.bathroom} Bath
             </h2>
-            <h2 className="flex text-sm sm:text-base gap-2 items-center bg-purple-100 rounded-lg p-[12px] sm:p-[10px] text-primary justify-center">
+            <h2 className="flex text-sm font-sans gap-2 items-center bg-purple-100 rounded-lg p-[12px] sm:p-[10px] text-primary justify-center">
               <CarFront />
               {listingDetail?.bathroom} Parking
             </h2>
