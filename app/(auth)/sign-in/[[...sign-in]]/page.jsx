@@ -7,7 +7,8 @@ export default function Page() {
         <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
           <section className="relative flex h-64 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
             <video className="absolute inset-0 h-full w-full object-cover opacity-80" autoPlay loop muted>
-              <source src="/signin-vid-1.mp4" type="video/mp4"/>
+              {/* <source src="/signin-vid-1.mp4" type="video/mp4"/> */}
+              <source src="https://res.cloudinary.com/dhtp6qiqb/video/upload/v1740164454/t7v0ma29jj1mombj130m.mp4"/>
             </video>
 
               <div className="hidden lg:relative lg:block lg:p-12">
